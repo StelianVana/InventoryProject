@@ -11,7 +11,7 @@
              margin: 0;
             padding-top: 56px; /* Space for fixed navbar */
             background-image: url('/images/benchyLight.png'); /* Background image for the home page */
-            background-size: auto ;
+            background-size: cover ;
             transition: background-color 0.5s;
         }
 
@@ -77,11 +77,11 @@
         /* Adjusting navbar for night mode */
         body.night-mode .navbar {
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            background-color: #343a40; /* Darker shade for dark mode */
+            background-color: #3d4a7f; /* Darker shade for dark mode */
         }
 
         body.night-mode .sidebar {
-            background-color: #343a40; /* Sidebar color in dark mode */
+            background-color: #3d4a7f; /* Sidebar color in dark mode */
         }
 
         /* Ensure nav items are centered in the navbar */
@@ -116,7 +116,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="checkMode()">
 
 <button class="night-mode-btn btn btn-primary btn-sm" onclick="toggleNightMode()">Night Mode</button>
 
@@ -202,21 +202,38 @@
         crossorigin="anonymous"></script>
 <script>
     function toggleNightMode() {
-        document.body.classList.toggle('night-mode');
-        var sidebar = document.querySelector('.sidebar');
+        var body = document.body;
+        var navbar = document.querySelector('.navbar');
+        body.classList.toggle('night-mode');
 
-        if (document.body.classList.contains('night-mode')) {
-            sidebar.style.backgroundColor = '#415a77'; /* Adjusted sidebar background color */
-            printerCards.forEach(function (card) {
-                card.style.backgroundColor = '#415a77'; /* Adjusted printer card background color */
-            });
+        if (body.classList.contains('night-mode')) {
+            navbar.classList.add('navbar-night-mode');
+            // Add similar adjustments for other elements as needed
         } else {
-            sidebar.style.backgroundColor = '#778da9'; /* Adjusted sidebar background color */
-            printerCards.forEach(function (card) {
-                card.style.backgroundColor = '#e0e1dd'; /* Adjusted printer card background color */
-            });
+            navbar.classList.remove('navbar-night-mode');
+            // Revert adjustments for other elements as needed
+        }
+
+        // Store the current mode in localStorage to persist across page loads
+        localStorage.setItem("mode", body.classList.contains("night-mode") ? "dark" : "light");
+    }
+
+    function checkMode() {
+        var body = document.body;
+        var navbar = document.querySelector('.navbar');
+        var mode = localStorage.getItem("mode");
+
+        if (mode === "dark") {
+            body.classList.add("night-mode");
+            navbar.classList.add('navbar-night-mode');
+        } else {
+            body.classList.remove("night-mode");
+            navbar.classList.remove('navbar-night-mode');
         }
     }
+
+    // Ensure mode check is performed when the page loads
+    document.addEventListener('DOMContentLoaded', checkMode);
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

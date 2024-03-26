@@ -155,12 +155,14 @@
     <div class="mb-3 text-end">
         <a th:href="@{/resins/add}" class="btn btn-primary btn-add-resin">Add Resin</a>
     </div>
-    <div class="counts-container d-flex justify-content-start mb-3">
-        <div class="total-pieces me-3">
-            <span>Total Pieces: </span><span th:text="${totalPieces}"></span>
+    <div class="counters mt-4 mb-4 d-flex justify-content-start">
+        <div class="total-pieces me-4 p-2 bg-light border rounded">
+            <span class="fw-bold">Total Pieces: </span>
+            <span th:text="${totalPieces}"></span>
         </div>
-        <div class="total-price">
-            <span>Total Price: </span><span th:text="${totalPrice}"></span>
+        <div class="total-price p-2 bg-light border rounded">
+            <span class="fw-bold">Total Price: </span>
+            <span th:text="${totalPrice}"></span>
         </div>
     </div>
 

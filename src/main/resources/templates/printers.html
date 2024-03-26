@@ -161,7 +161,9 @@
 <script>
     function toggleNightMode() {
         var body = document.body;
+        var navbar = document.querySelector('.navbar');
         body.classList.toggle("night-mode");
+        navbar.classList.toggle('navbar-dark-mode');
         localStorage.setItem("mode", body.classList.contains("night-mode") ? "dark" : "light");
     }
 
