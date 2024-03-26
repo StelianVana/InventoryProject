@@ -20,6 +20,8 @@ public class PrinterDTO {
 
     private String type;
 
+    private String status = "Ready";
+
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
     private Double price;

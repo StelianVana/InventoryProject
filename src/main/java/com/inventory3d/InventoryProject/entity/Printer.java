@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class Printer {
 
     @Column(name = "type", nullable = false)
     private String type;
+
+    private String status = "Ready";
 
     @Column(name = "price", nullable = false)
     private Double price;
