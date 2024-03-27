@@ -7,96 +7,110 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-            margin: 0;
-            padding-top: 56px;
-            background-image: url('/images/printerLight.png'); /* Adjust with your light mode background image */
-            background-size: cover;
-            transition: background-color 0.5s, background-image 0.5s;
-        }
+    margin: 0;
+    padding-top: 56px;
+    background-image: url('/images/printerLight.png'); /* Adjust with your light mode background image */
+    background-size: cover;
+    transition: background-color 0.5s, background-image 0.5s;
+}
 
-        .navbar-brand img {
-            height: 50px;
-        }
+.navbar-brand img {
+    height: 50px;
+}
 
-        .table-custom {
-            border-collapse: separate;
-            border-spacing: 0 15px;
-            width: 100%;
-        }
+.table-custom {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    width: 100%;
+}
 
-        .table-custom thead th {
-            background-color: #007bff;
-            color: white;
-            border: none;
-        }
+.table-custom thead th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
 
-        .table-custom tbody td {
-            background-color: #FFFFFF;
-            border: none;
-            border-bottom: 5px solid #F8F9FA;
-            border-radius: 5px;
-        }
+.table-custom tbody td {
+    background-color: #ffffff; /* Slightly transparent background */
+    border: none;
+    border-bottom: 5px solid #F8F9FA;
+    border-radius: 5px;
+}
 
-        .table-custom tbody tr {
-            padding: .5rem;
-        }
+.table-custom tbody tr {
+    padding: .5rem;
+}
 
-        .btn-custom-edit {
-            color: #fff;
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
+.btn-custom-edit {
+    color: #fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
 
-        .btn-custom-delete {
-            color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        body.night-mode {
-            background-image: url('/images/printerDark.png'); /* Adjust with your dark mode background image */
-            /* Other dark mode styling, e.g., text color */
-        }
+.btn-custom-delete {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
-        .navbar, .footer, .sidebar {
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            transition: background-color 0.5s;
-        }
+body.night-mode {
+    background-image: url('/images/printerDark.png'); /* Adjust with your dark mode background image */
+    color: #CCCCCC;
+}
 
-        /* Adjusting navbar for night mode */
-        body.night-mode .navbar {
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            background-color: #343a40; /* Darker shade for dark mode */
-        }
+.navbar, .footer, .sidebar {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    transition: background-color 0.5s;
+}
 
-        body.night-mode .sidebar {
-            background-color: #343a40; /* Sidebar color in dark mode */
-        }
+/* Adjusting navbar for night mode */
+body.night-mode .navbar {
+    background-color: #343a40; /* Darker shade for dark mode */
+}
 
-        /* Ensure nav items are centered in the navbar */
-        .navbar-collapse {
-            justify-content: center;
-        }
+.navbar-collapse {
+     justify-content: center;
+}
 
-        /* Night mode button styles */
-        .night-mode-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            background-color: #000000;
-            color: #ffffff;
-            border: none;
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
+/* Night mode button styles */
+.night-mode-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-        .night-mode-btn:hover {
-            background-color: #333333;
-        }
+.night-mode-btn:hover {
+    background-color: #333333;
+}
+
+/* Counters styling */
+.counters .total-pieces, .counters .total-price {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: auto;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 5px;
+    margin-right: 15px;
+    color: #242424;
+}
+
     </style>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete?");
+        }
+    </script>
 </head>
 <body onload="checkMode()">
 
@@ -129,6 +143,19 @@
 
         <div class="container mt-4">
             <h1 class="mb-4">Printers Overview</h1>
+            <div class="mb-3">
+                <a th:href="@{/printers/add}" class="btn btn-primary">Add Printer</a>
+            </div>
+            <div class="counters mt-4 mb-4 d-flex justify-content-start">
+                <div class="total-pieces me-4 p-2 bg-light border rounded">
+                    <span class="fw-bold">Total Pieces: </span>
+                    <span th:text="${totalPieces}"></span>
+                </div>
+                <div class="total-price p-2 bg-light border rounded">
+                    <span class="fw-bold">Total Price: </span>
+                    <span th:text="${totalPrice}"></span>
+                </div>
+            </div>
             <table class="table table-custom">
                 <thead>
                 <tr>
@@ -148,7 +175,7 @@
                     <td>
                         <a th:href="@{'/printers/edit/' + ${printer.id}}" class="btn btn-sm btn-custom-edit">Edit</a>
                         <a th:href="@{'/printers/delete/' + ${printer.id}}"
-                           class="btn btn-sm btn-custom-delete">Delete</a>
+                           class="btn btn-sm btn-custom-delete" onclick="return confirmDelete()">Delete</a>
                     </td>
                 </tr>
                 </tbody>

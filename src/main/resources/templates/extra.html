@@ -9,110 +9,113 @@
           crossorigin="anonymous">
     <style>
         body {
-           margin: 0;
-           padding-top: 56px;
-           background-image: url('/images/extraLight.png'); /* Adjust with your light mode background image */
-           background-size: cover;
-           transition: background-color 0.5s, background-image 0.5s;
-       }
+    margin: 0;
+    padding-top: 56px;
+    background-image: url('/images/extraLight.png'); /* Adjust with your light mode background image */
+    background-size: cover;
+    transition: background-color 0.5s, background-image 0.5s;
+}
 
-       .navbar-brand img {
-           height: 50px;
-       }
+.navbar-brand img {
+    height: 50px;
+}
 
-       .table-custom {
-           border-collapse: separate;
-           border-spacing: 0 15px;
-           width: 100%;
-           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-       }
+.table-custom {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    width: 100%;
+}
 
-       .table-custom thead th {
-           background-color: #007bff;
-           color: white;
-           border: none;
-       }
+.table-custom thead th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
 
-       .table-custom tbody td {
-           background-color: rgba(255,255,255,0.7); /* Slightly transparent background */
-           border: none;
-           border-bottom: 5px solid #F8F9FA;
-           border-radius: 5px;
-       }
+.table-custom tbody td {
+    background-color: rgba(255,255,255,0.7); /* Slightly transparent background */
+    border: none;
+    border-bottom: 5px solid #F8F9FA;
+    border-radius: 5px;
+}
 
-       .table-custom tbody tr {
-           padding: .5rem;
-       }
+.table-custom tbody tr {
+    padding: .5rem;
+}
 
-       .btn-custom-edit {
-           color: #fff;
-           background-color: #ffc107;
-           border-color: #ffc107;
-       }
+.btn-custom-edit {
+    color: #fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
 
-       .btn-custom-delete {
-           color: #fff;
-           background-color: #dc3545;
-           border-color: #dc3545;
-       }
+.btn-custom-delete {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
-       body.night-mode {
-           background-image: url('/images/extraDark.png'); /* Adjust with your dark mode background image */
-           /* Other dark mode styling, e.g., text color */
-       }
+body.night-mode {
+    background-image: url('/images/extraDark.png'); /* Adjust with your dark mode background image */
+    color: #CCCCCC;
+}
 
-       .navbar, .footer, .sidebar {
-           background-color: rgba(255, 255, 255, 0.5)
-           box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-           transition: background-color 0.5s;
-       }
+.navbar, .footer, .sidebar {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    transition: background-color 0.5s;
+}
 
-       /* Adjusting navbar for night mode */
-       body.night-mode .navbar {
-           background-color: #343a40; /* Darker shade for dark mode */
-       }
+/* Adjusting navbar for night mode */
+body.night-mode .navbar {
+    background-color: #343a40; /* Darker shade for dark mode */
+}
 
-       .navbar-collapse {
-            justify-content: center;
+.navbar-collapse {
+     justify-content: center;
+}
+
+/* Night mode button styles */
+.night-mode-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.night-mode-btn:hover {
+    background-color: #333333;
+}
+
+/* Counters styling */
+.counters .total-pieces, .counters .total-price {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: auto;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+    </style>
+    <script>
+        function confirmUpdateQuantity() {
+            return confirm("Are you sure you want to update the quantity?");
         }
 
-       /* Night mode button styles */
-       .night-mode-btn {
-           position: fixed;
-           top: 20px;
-           right: 20px;
-           z-index: 9999;
-           background-color: #000000;
-           color: #ffffff;
-           border: none;
-           padding: 8px 16px;
-           font-size: 14px;
-           border-radius: 5px;
-           cursor: pointer;
-           transition: background-color 0.3s, color 0.3s;
-       }
-
-       .night-mode-btn:hover {
-           background-color: #333333;
-       }
-
-       /* Counters styling */
-       .counters .total-pieces, .counters .total-price {
-           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-           width: auto;
-           font-size: 1rem;
-           padding: 0.75rem 1rem;
-           background-color: rgba(255,255,255,0.9);
-           border-radius: 5px;
-           margin-right: 15px;
-       }
-
-       body.night-mode .counters .total-pieces, body.night-mode .counters .total-price {
-           background-color: #343a40;
-           color: #ffffff;
-           border-color: #495057;
-       }
-    </style>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete?");
+        }
+    </script>
 </head>
 <body onload="checkMode()">
 
@@ -170,15 +173,15 @@
             <td th:text="${extra.category}"></td>
             <td th:text="${extra.price}"></td>
             <td>
-                <form th:action="@{/extras/updateQuantity}" method="post">
+                <form th:action="@{/extras/updateQuantity}" method="post" onsubmit="return confirmUpdateQuantity()">
                     <input type="hidden" name="id" th:value="${extra.id}" />
-                    <input type="number" name="quantity" th:value="${extra.quantity}" min="0" class="form-control" required />
-                    <button type="submit" class="btn btn-info btn-sm mt-1">Update</button>
+                    <input type="number" name="quantity" th:value="${extra.quantity}" min="1" class="form-control" required />
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                 </form>
             </td>
             <td>
                 <a th:href="@{'/extras/edit/' + ${extra.id}}" class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{'/extras/delete/' + ${extra.id}}" class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{'/extras/delete/' + ${extra.id}}" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</a>
             </td>
         </tr>
         </tbody>

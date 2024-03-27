@@ -12,12 +12,25 @@
             padding-top: 56px; /* Space for fixed navbar */
             background-image: url('/images/benchyLight.png'); /* Background image for the home page */
             background-size: cover ;
-            transition: background-color 0.5s;
+            transition: background-color 0.5s, background-image 0.5s;
         }
 
         .welcome-container {
-            text-align: center;
-            margin-bottom: 30px;
+           position: absolute;
+           top: 100px; /* Distance from the top margin */
+           left: 0;
+           right: 0;
+           display: flex;
+           justify-content: center; /* Center horizontally */
+        }
+
+        .welcome-container h1 {
+           font-size: 2.5rem; /* Adjusted font size for better readability */
+        }
+
+        .content {
+           margin-top: 100px; /* Increased margin to create space between the navbar and content */
+           padding: 50px; /* Adjusted padding for content */
         }
 
         .entity-links {
@@ -237,38 +250,57 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Get all dropdown buttons
-        var dropdownButtons = document.querySelectorAll('.status-btn');
+        // Get all printer cards
+        var printerCards = document.querySelectorAll('.printer-card');
 
-        // Attach click event listener to each dropdown button
-        dropdownButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                // Get the selected item text and update the button text
-                var selectedItem = this.nextElementSibling.querySelector('.dropdown-item.active').innerText;
-                this.innerText = selectedItem;
+        // Iterate over each printer card
+        printerCards.forEach(function (card) {
+            // Get the dropdown button and items for the current card
+            var dropdownButton = card.querySelector('.status-btn');
+            var dropdownItems = card.querySelectorAll('.dropdown-item');
 
-                // Update card style based on selected status
-                var card = this.closest('.printer-card');
-                if (selectedItem === 'Busy') {
+            // Attach click event listener to each dropdown item within the scope of the current card
+            dropdownItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    // Get the selected item text
+                    var selectedItemText = this.innerText;
+
+                    // Update the parent button text
+                    dropdownButton.innerText = selectedItemText;
+
+                    // Update card style based on selected status
+                    if (selectedItemText === 'Busy') {
+                        card.classList.remove('status-ready');
+                        card.classList.add('status-busy');
+                    } else if (selectedItemText === 'Ready') {
+                        card.classList.remove('status-busy');
+                        card.classList.add('status-ready');
+                    }
+
+                    // Get the printer ID associated with this card
+                    var printerId = card.dataset.printerId;
+
+                    // Save the status to localStorage with the printer ID as part of the key
+                    localStorage.setItem("printerStatus_" + printerId, selectedItemText);
+                });
+            });
+
+            // Initialize status from localStorage for each printer card
+            var printerId = card.dataset.printerId;
+            var savedStatus = localStorage.getItem("printerStatus_" + printerId);
+            if (savedStatus) {
+                // Set the dropdown button text and update card style based on the saved status
+                dropdownButton.innerText = savedStatus;
+                if (savedStatus === 'Busy') {
                     card.classList.remove('status-ready');
                     card.classList.add('status-busy');
-                } else if (selectedItem === 'Ready') {
+                } else if (savedStatus === 'Ready') {
                     card.classList.remove('status-busy');
                     card.classList.add('status-ready');
                 }
-            });
-
-            // Attach click event listener to each dropdown item
-            var dropdownItems = button.nextElementSibling.querySelectorAll('.dropdown-item');
-            dropdownItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    // Remove 'active' class from all items and add it to the clicked item
-                    dropdownItems.forEach(function (i) {
-                        i.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-            });
+            } else {
+                dropdownButton.innerText = 'Status';
+            }
         });
     });
 </script>

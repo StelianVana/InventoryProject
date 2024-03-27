@@ -7,123 +7,113 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-            margin: 0;
-            padding-top: 56px;
-            background-image: url('/images/resinLight.png'); /* Adjust with your light mode background image */
-            background-size: cover;
-            transition: background-color 0.5s, background-image 0.5s;
-        }
+    margin: 0;
+    padding-top: 56px;
+    background-image: url('/images/resinLight.png'); /* Adjust with your light mode background image */
+    background-size: cover;
+    transition: background-color 0.5s, background-image 0.5s;
+}
 
-        .navbar-brand img {
-            height: 50px;
-        }
+.navbar-brand img {
+    height: 50px;
+}
 
-        .table-custom {
-            border-collapse: separate;
-            border-spacing: 0 15px;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+.table-custom {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    width: 100%;
+}
 
-        .table-custom thead th {
-            background-color: #007bff;
-            color: white;
-            border: none;
-        }
+.table-custom thead th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
 
-        .table-custom tbody td {
-            background-color: rgba(500, 500, 500, 0.7);
-            border: none;
-            border-bottom: 5px solid #F8F9FA;
-            border-radius: 5px;
-        }
+.table-custom tbody td {
+    background-color: rgba(255,255,255,0.7); /* Slightly transparent background */
+    border: none;
+    border-bottom: 5px solid #F8F9FA;
+    border-radius: 5px;
+}
 
-        .table-custom tbody tr {
-            padding: .5rem;
-        }
+.table-custom tbody tr {
+    padding: .5rem;
+}
 
-        .btn-custom-edit {
-            color: #fff;
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
+.btn-custom-edit {
+    color: #fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
 
-        .btn-custom-delete {
-            color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        body.night-mode {
-            background-image: url('/images/resinDark.png'); /* Adjust with your dark mode background image */
-            /* Other dark mode styling, e.g., text color */
-        }
+.btn-custom-delete {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
-        .navbar, .footer, .sidebar {
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            transition: background-color 0.5s;
-        }
+body.night-mode {
+    background-image: url('/images/resinDark.png'); /* Adjust with your dark mode background image */
+    color: #CCCCCC;
+}
 
-        /* Adjusting navbar for night mode */
-        body.night-mode .navbar {
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            background-color: #343a40; /* Darker shade for dark mode */
-        }
+.navbar, .footer, .sidebar {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    transition: background-color 0.5s;
+}
 
-        .add-resin-btn {
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.2s, color 0.2s;
-        }
-        .add-resin-btn:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            color: #ffffff;
-        }
-        .total-counts {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .total-counts span {
-            font-weight: bold;
-        }
+/* Adjusting navbar for night mode */
+body.night-mode .navbar {
+    background-color: #343a40; /* Darker shade for dark mode */
+}
 
-        body.night-mode .sidebar {
-            background-color: #343a40; /* Sidebar color in dark mode */
-        }
+.navbar-collapse {
+     justify-content: center;
+}
 
-        /* Ensure nav items are centered in the navbar */
-        .navbar-collapse {
-            justify-content: center;
-        }
+/* Night mode button styles */
+.night-mode-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-        /* Night mode button styles */
-        .night-mode-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            background-color: #000000;
-            color: #ffffff;
-            border: none;
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
+.night-mode-btn:hover {
+    background-color: #333333;
+}
 
-        .night-mode-btn:hover {
-            background-color: #333333;
-        }
+/* Counters styling */
+.counters .total-pieces, .counters .total-price {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: auto;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
     </style>
+    <script>
+        function confirmUpdateQuantity() {
+            return confirm("Are you sure you want to update the quantity?");
+        }
+
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete?");
+        }
+    </script>
 </head>
 <body onload="checkMode()">
 
@@ -152,8 +142,8 @@
 
 <div class="container mt-4">
     <h1>List Resins</h1>
-    <div class="mb-3 text-end">
-        <a th:href="@{/resins/add}" class="btn btn-primary btn-add-resin">Add Resin</a>
+    <div class="mb-3">
+        <a th:href="@{/resins/add}" class="btn btn-primary">Add Resin</a>
     </div>
     <div class="counters mt-4 mb-4 d-flex justify-content-start">
         <div class="total-pieces me-4 p-2 bg-light border rounded">
@@ -165,15 +155,6 @@
             <span th:text="${totalPrice}"></span>
         </div>
     </div>
-
-
-    <!-- Display a message if the list is empty -->
-    <div th:if="${#lists.isEmpty(resins)}">
-        <p>No Resin available.</p>
-    </div>
-
-    <!-- Display the table if the list is not empty -->
-    <table th:if="${not #lists.isEmpty(resins)}" class="table table-striped table-bordered">
         <table class="table table-custom">
             <thead>
             <tr>
@@ -192,19 +173,18 @@
             <td th:text="${resin.type}"></td>
             <td th:text="${resin.price}"></td>
             <td>
-                <form th:action="@{/resins/updateQuantity}" method="post">
+                <form th:action="@{/resins/updateQuantity}" method="post" onsubmit="return confirmUpdateQuantity()">
                     <input type="hidden" name="id" th:value="${resin.id}"/>
                     <input type="number" name="quantity" th:value="${resin.quantity}" min="1" required class="form-control"/>
-                    <button type="submit" class="btn btn-info btn-sm mt-1">Update Quantity</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                 </form>
             </td>
             <td>
                 <a th:href="@{'/resins/edit/' + ${resin.id}}" class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{'/resins/delete/' + ${resin.id}}" class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{'/resins/delete/' + ${resin.id}}" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</a>
             </td>
         </tr>
         </tbody>
-    </table>
     </table>
 </div>
 
