@@ -66,7 +66,7 @@ body.night-mode {
 
 /* Adjusting navbar for night mode */
 body.night-mode .navbar {
-    background-color: #343a40; /* Darker shade for dark mode */
+    background-color: #192a43; /* Darker shade for dark mode */
 }
 
 .navbar-collapse {
@@ -105,6 +105,18 @@ body.night-mode .navbar {
     color: #242424;
 }
 
+body.night-mode .table-custom tbody td {
+background-color: #224170; /* Slightly transparent background */
+    border: none;
+    border-bottom: 5px solid #F8F9FA;
+    border-radius: 5px;
+    color: #fff;
+
+body.night-mode .table-custom thead th {
+background-color: #181c32;
+    color: white;
+    border: none;
+
     </style>
     <script>
         function confirmDelete() {
@@ -116,28 +128,24 @@ body.night-mode .navbar {
 
 <button class="night-mode-btn btn btn-primary btn-sm" onclick="toggleNightMode()">Night Mode</button>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="/images/LOGO.png" alt="Logo" class="navbar-logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ml-auto">
-                        <a class="nav-link active" href="/printers/all">Printers</a>
-                        <a class="nav-link" href="/filamentSpools/all">Filament Spools</a>
-                        <a class="nav-link" href="/resins/all">Resins</a>
-                        <a class="nav-link" href="/extras/all">Extras</a>
-                    </div>
-                </div>
+        <a class="navbar-brand" href="/">
+            <img src="/images/LOGO.png" alt="Logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link active" href="/printers/all">Printers</a>
+                <a class="nav-link" href="/filamentSpools/all">Filament Spools</a>
+                <a class="nav-link" href="/resins/all">Resins</a>
+                <a class="nav-link" href="/extras/all">Extras</a>
             </div>
-        </nav>
+        </div>
     </div>
 </nav>
 
@@ -187,22 +195,92 @@ body.night-mode .navbar {
         crossorigin="anonymous"></script>
 <script>
     function toggleNightMode() {
-        var body = document.body;
-        var navbar = document.querySelector('.navbar');
-        body.classList.toggle("night-mode");
-        navbar.classList.toggle('navbar-dark-mode');
-        localStorage.setItem("mode", body.classList.contains("night-mode") ? "dark" : "light");
-    }
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var tableHeads = document.querySelectorAll('.table-custom thead th');
+    var tableCells = document.querySelectorAll('.table-custom tbody td');
 
-    function checkMode() {
-        var body = document.body;
-        var mode = localStorage.getItem("mode");
-        if (mode === "dark") {
-            body.classList.add("night-mode");
-        } else {
-            body.classList.remove("night-mode");
-        }
+    body.classList.toggle("night-mode");
+    // Toggle classes for navbar to switch between light and dark themes
+    if (body.classList.contains("night-mode")) {
+        // Navbar
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+
+        // Table head
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#224170"; // Dark mode table head background
+            th.style.color = "white";
+        });
+
+        // Table cells
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#192a43"; // Dark mode table cell background
+            td.style.color = "#fff"; // Dark mode text color
+        });
+
+        localStorage.setItem("mode", "dark");
+    } else {
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+
+        // Revert table head to light mode style
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#007bff"; // Light mode table head background
+            th.style.color = "white";
+        });
+
+        // Revert table cells to light mode style
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#ffffff"; // Light mode table cell background
+            td.style.color = "#242424"; // Light mode text color
+        });
+
+        localStorage.setItem("mode", "light");
     }
+}
+
+function checkMode() {
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var tableHeads = document.querySelectorAll('.table-custom thead th');
+    var tableCells = document.querySelectorAll('.table-custom tbody td');
+    var mode = localStorage.getItem("mode");
+
+    if (mode === "dark") {
+        body.classList.add("night-mode");
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+
+        // Apply dark mode styles to table
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#224170";
+            th.style.color = "white";
+        });
+
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#192a43";
+            td.style.color = "#fff";
+        });
+    } else {
+        body.classList.remove("night-mode");
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+
+        // Revert table styles to light mode
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#007bff";
+            th.style.color = "white";
+        });
+
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#ffffff";
+            td.style.color = "#242424";
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkMode);
 </script>
 </body>
 </html>

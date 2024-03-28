@@ -215,38 +215,37 @@
         crossorigin="anonymous"></script>
 <script>
     function toggleNightMode() {
-        var body = document.body;
-        var navbar = document.querySelector('.navbar');
-        body.classList.toggle('night-mode');
-
-        if (body.classList.contains('night-mode')) {
-            navbar.classList.add('navbar-night-mode');
-            // Add similar adjustments for other elements as needed
-        } else {
-            navbar.classList.remove('navbar-night-mode');
-            // Revert adjustments for other elements as needed
-        }
-
-        // Store the current mode in localStorage to persist across page loads
-        localStorage.setItem("mode", body.classList.contains("night-mode") ? "dark" : "light");
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    body.classList.toggle("night-mode");
+    // Toggle classes for navbar to switch between light and dark themes
+    if (body.classList.contains("night-mode")) {
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+        localStorage.setItem("mode", "dark");
+    } else {
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+        localStorage.setItem("mode", "light");
     }
+}
 
-    function checkMode() {
-        var body = document.body;
-        var navbar = document.querySelector('.navbar');
-        var mode = localStorage.getItem("mode");
-
-        if (mode === "dark") {
-            body.classList.add("night-mode");
-            navbar.classList.add('navbar-night-mode');
-        } else {
-            body.classList.remove("night-mode");
-            navbar.classList.remove('navbar-night-mode');
-        }
+function checkMode() {
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var mode = localStorage.getItem("mode");
+    if (mode === "dark") {
+        body.classList.add("night-mode");
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+    } else {
+        body.classList.remove("night-mode");
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
     }
+}
 
-    // Ensure mode check is performed when the page loads
-    document.addEventListener('DOMContentLoaded', checkMode);
+document.addEventListener('DOMContentLoaded', checkMode);
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -7,102 +7,115 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-    margin: 0;
-    padding-top: 56px;
-    background-image: url('/images/resinLight.png'); /* Adjust with your light mode background image */
-    background-size: cover;
-    transition: background-color 0.5s, background-image 0.5s;
-}
+     margin: 0;
+     padding-top: 56px;
+     background-image: url('/images/printerLight.png'); /* Adjust with your light mode background image */
+     background-size: cover;
+     transition: background-color 0.5s, background-image 0.5s;
+ }
 
-.navbar-brand img {
-    height: 50px;
-}
+ .navbar-brand img {
+     height: 50px;
+ }
 
-.table-custom {
-    border-collapse: separate;
-    border-spacing: 0 15px;
-    width: 100%;
-}
+ .table-custom {
+     border-collapse: separate;
+     border-spacing: 0 15px;
+     width: 100%;
+ }
 
-.table-custom thead th {
-    background-color: #007bff;
-    color: white;
-    border: none;
-}
+ .table-custom thead th {
+     background-color: #007bff;
+     color: white;
+     border: none;
+ }
 
-.table-custom tbody td {
-    background-color: rgba(255,255,255,0.7); /* Slightly transparent background */
-    border: none;
-    border-bottom: 5px solid #F8F9FA;
-    border-radius: 5px;
-}
+ .table-custom tbody td {
+     background-color: #ffffff; /* Slightly transparent background */
+     border: none;
+     border-bottom: 5px solid #F8F9FA;
+     border-radius: 5px;
+ }
 
-.table-custom tbody tr {
-    padding: .5rem;
-}
+ .table-custom tbody tr {
+     padding: .5rem;
+ }
 
-.btn-custom-edit {
-    color: #fff;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
+ .btn-custom-edit {
+     color: #fff;
+     background-color: #ffc107;
+     border-color: #ffc107;
+ }
 
-.btn-custom-delete {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
+ .btn-custom-delete {
+     color: #fff;
+     background-color: #dc3545;
+     border-color: #dc3545;
+ }
 
-body.night-mode {
-    background-image: url('/images/resinDark.png'); /* Adjust with your dark mode background image */
-    color: #CCCCCC;
-}
+ body.night-mode {
+     background-image: url('/images/printerDark.png'); /* Adjust with your dark mode background image */
+     color: #CCCCCC;
+ }
 
-.navbar, .footer, .sidebar {
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-    transition: background-color 0.5s;
-}
+ .navbar, .footer, .sidebar {
+     background-color: rgba(255, 255, 255, 0.5);
+     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+     transition: background-color 0.5s;
+ }
 
-/* Adjusting navbar for night mode */
-body.night-mode .navbar {
-    background-color: #343a40; /* Darker shade for dark mode */
-}
+ /* Adjusting navbar for night mode */
+ body.night-mode .navbar {
+     background-color: #192a43; /* Darker shade for dark mode */
+ }
 
-.navbar-collapse {
-     justify-content: center;
-}
+ .navbar-collapse {
+      justify-content: center;
+ }
 
-/* Night mode button styles */
-.night-mode-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
+ /* Night mode button styles */
+ .night-mode-btn {
+     position: fixed;
+     top: 20px;
+     right: 20px;
+     z-index: 9999;
+     background-color: #000000;
+     color: #ffffff;
+     border: none;
+     padding: 8px 16px;
+     font-size: 14px;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s, color 0.3s;
+ }
 
-.night-mode-btn:hover {
-    background-color: #333333;
-}
+ .night-mode-btn:hover {
+     background-color: #333333;
+ }
 
-/* Counters styling */
-.counters .total-pieces, .counters .total-price {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: auto;
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-    background-color: rgba(255,255,255,0.9);
-    border-radius: 5px;
-    margin-right: 15px;
-}
+ /* Counters styling */
+ .counters .total-pieces, .counters .total-price {
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+     width: auto;
+     font-size: 1rem;
+     padding: 0.75rem 1rem;
+     background-color: rgba(255,255,255,0.9);
+     border-radius: 5px;
+     margin-right: 15px;
+     color: #242424;
+ }
+
+ body.night-mode .table-custom tbody td {
+ background-color: #224170; /* Slightly transparent background */
+     border: none;
+     border-bottom: 5px solid #F8F9FA;
+     border-radius: 5px;
+     color: #fff;
+
+ body.night-mode .table-custom thead th {
+ background-color: #181c32;
+     color: white;
+     border: none;
 
     </style>
     <script>
@@ -193,20 +206,92 @@ body.night-mode .navbar {
         crossorigin="anonymous"></script>
 <script>
     function toggleNightMode() {
-        var body = document.body;
-        body.classList.toggle("night-mode");
-        localStorage.setItem("mode", body.classList.contains("night-mode") ? "dark" : "light");
-    }
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var tableHeads = document.querySelectorAll('.table-custom thead th');
+    var tableCells = document.querySelectorAll('.table-custom tbody td');
 
-    function checkMode() {
-        var body = document.body;
-        var mode = localStorage.getItem("mode");
-        if (mode === "dark") {
-            body.classList.add("night-mode");
-        } else {
-            body.classList.remove("night-mode");
-        }
+    body.classList.toggle("night-mode");
+    // Toggle classes for navbar to switch between light and dark themes
+    if (body.classList.contains("night-mode")) {
+        // Navbar
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+
+        // Table head
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#224170"; // Dark mode table head background
+            th.style.color = "white";
+        });
+
+        // Table cells
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#192a43"; // Dark mode table cell background
+            td.style.color = "#fff"; // Dark mode text color
+        });
+
+        localStorage.setItem("mode", "dark");
+    } else {
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+
+        // Revert table head to light mode style
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#007bff"; // Light mode table head background
+            th.style.color = "white";
+        });
+
+        // Revert table cells to light mode style
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#ffffff"; // Light mode table cell background
+            td.style.color = "#242424"; // Light mode text color
+        });
+
+        localStorage.setItem("mode", "light");
     }
+}
+
+function checkMode() {
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var tableHeads = document.querySelectorAll('.table-custom thead th');
+    var tableCells = document.querySelectorAll('.table-custom tbody td');
+    var mode = localStorage.getItem("mode");
+
+    if (mode === "dark") {
+        body.classList.add("night-mode");
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+
+        // Apply dark mode styles to table
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#224170";
+            th.style.color = "white";
+        });
+
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#192a43";
+            td.style.color = "#fff";
+        });
+    } else {
+        body.classList.remove("night-mode");
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+
+        // Revert table styles to light mode
+        tableHeads.forEach(function(th) {
+            th.style.backgroundColor = "#007bff";
+            th.style.color = "white";
+        });
+
+        tableCells.forEach(function(td) {
+            td.style.backgroundColor = "#ffffff";
+            td.style.color = "#242424";
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkMode);
 </script>
 </body>
 </html>
