@@ -1,9 +1,7 @@
 package com.inventory3d.InventoryProject.service;
 
 import com.inventory3d.InventoryProject.entity.Extra;
-import com.inventory3d.InventoryProject.entity.FilamentSpool;
 import com.inventory3d.InventoryProject.model.ExtraDTO;
-import com.inventory3d.InventoryProject.model.FilamentSpoolDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

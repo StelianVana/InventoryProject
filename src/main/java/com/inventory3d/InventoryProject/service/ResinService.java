@@ -1,8 +1,6 @@
 package com.inventory3d.InventoryProject.service;
 
-import com.inventory3d.InventoryProject.entity.FilamentSpool;
 import com.inventory3d.InventoryProject.entity.Resin;
-import com.inventory3d.InventoryProject.model.FilamentSpoolDTO;
 import com.inventory3d.InventoryProject.model.ResinDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

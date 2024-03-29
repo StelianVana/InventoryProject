@@ -25,7 +25,7 @@ public class Extra {
     @Column(name = "type")
     private String name;
 
-    @Column(name="quantity",nullable = false)
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @Column(name = "price", nullable = false)

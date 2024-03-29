@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface FilamentSpoolRepo extends JpaRepository<FilamentSpool, Integer> {
     List<FilamentSpool> findByType(String type);
+
     FilamentSpool findByBrandAndType(String brand, String type);
+
     FilamentSpool findByBrand(String brand);
 
     @Query("SELECT f FROM FilamentSpool f WHERE f.brand = :brand AND f.color = :color AND f.type = :type AND f.price = :price AND f.quantity = :quantity")
@@ -21,8 +23,8 @@ public interface FilamentSpoolRepo extends JpaRepository<FilamentSpool, Integer>
 
     @Query("SELECT f FROM FilamentSpool f WHERE f.brand = :brand AND f.color = :color AND f.type = :type AND f.price = :price")
     List<FilamentSpool> findByAllAttributesExceptQuantity(@Param("brand") String brand,
-                                                    @Param("color") String color,
-                                                    @Param("type") String type,
-                                                    @Param("price") Double price);
+                                                          @Param("color") String color,
+                                                          @Param("type") String type,
+                                                          @Param("price") Double price);
 }
 

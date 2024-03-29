@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
 
     <style>
         body {
              margin: 0;
             padding-top: 56px; /* Space for fixed navbar */
             background-image: url('/images/benchyLight.png'); /* Background image for the home page */
-            background-size: auto ;
-            transition: background-color 0.5s;
+            background-size: cover ;
+            transition: background-color 0.5s, background-image 0.5s;
         }
 
         .welcome-container {
-            text-align: center;
-            margin-bottom: 30px;
+           position: absolute;
+           top: 100px; /* Distance from the top margin */
+           left: 0;
+           right: 0;
+           display: flex;
+           justify-content: center; /* Center horizontally */
+        }
+
+        .welcome-container h1 {
+           font-size: 2.5rem; /* Adjusted font size for better readability */
+        }
+
+        .content {
+           margin-top: 100px; /* Increased margin to create space between the navbar and content */
+           padding: 50px; /* Adjusted padding for content */
         }
 
         .entity-links {
@@ -77,11 +90,11 @@
         /* Adjusting navbar for night mode */
         body.night-mode .navbar {
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            background-color: #343a40; /* Darker shade for dark mode */
+            background-color: #3d4a7f; /* Darker shade for dark mode */
         }
 
         body.night-mode .sidebar {
-            background-color: #343a40; /* Sidebar color in dark mode */
+            background-color: #3d4a7f; /* Sidebar color in dark mode */
         }
 
         /* Ensure nav items are centered in the navbar */
@@ -116,7 +129,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="checkMode()">
 
 <button class="night-mode-btn btn btn-primary btn-sm" onclick="toggleNightMode()">Night Mode</button>
 
@@ -127,16 +140,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-            <img src="/images/LOGO.png" alt="Logo" class="navbar-logo">
+            <img alt="Logo" class="navbar-logo" src="/images/LOGO.png">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto"> <!-- Use me-auto for left alignment or ml-auto for right -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/printers/all">Printers</a>
+                    <a aria-current="page" class="nav-link active" href="/printers/all">Printers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/filamentSpools/all">Filament Spools</a>
@@ -160,17 +173,17 @@
 
         <!-- Display Bootstrap cards for each printer -->
         <div class="row">
-            <div th:each="printer: ${printers}" class="col-md-4">
+            <div class="col-md-4" th:each="printer: ${printers}">
                 <div class="card printer-card">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${printer.name}"></h5>
                         <p class="card-text">Brand: <span th:text="${printer.brand}"></span></p>
                         <p class="card-text">Type: <span th:text="${printer.type}"></span></p>
                         <!-- Wrench icon for editing material -->
-                        <a th:href="@{'/printers/edit/' + ${printer.id}}" class="btn btn-link">
+                        <a class="btn btn-link" th:href="@{'/printers/edit/' + ${printer.id}}">
                             <svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                    class="bi bi-gear-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                                    width="16" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                         d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
                             </svg>
@@ -179,8 +192,8 @@
                         <p class="card-text">Price: <span th:text="${printer.price}"></span></p>
                         <!-- Split button dropdown for status -->
                         <div class="btn-group status-toggle">
-                            <button type="button" class="btn btn-secondary status-btn dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                            <button aria-expanded="false" class="btn btn-secondary status-btn dropdown-toggle"
+                                    data-bs-toggle="dropdown" type="button">
                                 Status
                             </button>
                             <ul class="dropdown-menu">
@@ -197,61 +210,96 @@
 
 <!-- Include Bootstrap's JavaScript -->
 <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function toggleNightMode() {
-        document.body.classList.toggle('night-mode');
-        var sidebar = document.querySelector('.sidebar');
-
-        if (document.body.classList.contains('night-mode')) {
-            sidebar.style.backgroundColor = '#415a77'; /* Adjusted sidebar background color */
-            printerCards.forEach(function (card) {
-                card.style.backgroundColor = '#415a77'; /* Adjusted printer card background color */
-            });
-        } else {
-            sidebar.style.backgroundColor = '#778da9'; /* Adjusted sidebar background color */
-            printerCards.forEach(function (card) {
-                card.style.backgroundColor = '#e0e1dd'; /* Adjusted printer card background color */
-            });
-        }
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    body.classList.toggle("night-mode");
+    // Toggle classes for navbar to switch between light and dark themes
+    if (body.classList.contains("night-mode")) {
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+        localStorage.setItem("mode", "dark");
+    } else {
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+        localStorage.setItem("mode", "light");
     }
+}
+
+function checkMode() {
+    var body = document.body;
+    var navbar = document.querySelector('.navbar');
+    var mode = localStorage.getItem("mode");
+    if (mode === "dark") {
+        body.classList.add("night-mode");
+        navbar.classList.remove("navbar-light", "bg-light");
+        navbar.classList.add("navbar-dark", "bg-dark");
+    } else {
+        body.classList.remove("night-mode");
+        navbar.classList.remove("navbar-dark", "bg-dark");
+        navbar.classList.add("navbar-light", "bg-light");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkMode);
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Get all dropdown buttons
-        var dropdownButtons = document.querySelectorAll('.status-btn');
+        // Get all printer cards
+        var printerCards = document.querySelectorAll('.printer-card');
 
-        // Attach click event listener to each dropdown button
-        dropdownButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                // Get the selected item text and update the button text
-                var selectedItem = this.nextElementSibling.querySelector('.dropdown-item.active').innerText;
-                this.innerText = selectedItem;
+        // Iterate over each printer card
+        printerCards.forEach(function (card) {
+            // Get the dropdown button and items for the current card
+            var dropdownButton = card.querySelector('.status-btn');
+            var dropdownItems = card.querySelectorAll('.dropdown-item');
 
-                // Update card style based on selected status
-                var card = this.closest('.printer-card');
-                if (selectedItem === 'Busy') {
+            // Attach click event listener to each dropdown item within the scope of the current card
+            dropdownItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    // Get the selected item text
+                    var selectedItemText = this.innerText;
+
+                    // Update the parent button text
+                    dropdownButton.innerText = selectedItemText;
+
+                    // Update card style based on selected status
+                    if (selectedItemText === 'Busy') {
+                        card.classList.remove('status-ready');
+                        card.classList.add('status-busy');
+                    } else if (selectedItemText === 'Ready') {
+                        card.classList.remove('status-busy');
+                        card.classList.add('status-ready');
+                    }
+
+                    // Get the printer ID associated with this card
+                    var printerId = card.dataset.printerId;
+
+                    // Save the status to localStorage with the printer ID as part of the key
+                    localStorage.setItem("printerStatus_" + printerId, selectedItemText);
+                });
+            });
+
+            // Initialize status from localStorage for each printer card
+            var printerId = card.dataset.printerId;
+            var savedStatus = localStorage.getItem("printerStatus_" + printerId);
+            if (savedStatus) {
+                // Set the dropdown button text and update card style based on the saved status
+                dropdownButton.innerText = savedStatus;
+                if (savedStatus === 'Busy') {
                     card.classList.remove('status-ready');
                     card.classList.add('status-busy');
-                } else if (selectedItem === 'Ready') {
+                } else if (savedStatus === 'Ready') {
                     card.classList.remove('status-busy');
                     card.classList.add('status-ready');
                 }
-            });
-
-            // Attach click event listener to each dropdown item
-            var dropdownItems = button.nextElementSibling.querySelectorAll('.dropdown-item');
-            dropdownItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    // Remove 'active' class from all items and add it to the clicked item
-                    dropdownItems.forEach(function (i) {
-                        i.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-            });
+            } else {
+                dropdownButton.innerText = 'Status';
+            }
         });
     });
 </script>

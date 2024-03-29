@@ -1,10 +1,7 @@
 package com.inventory3d.InventoryProject.controller;
 
-import com.inventory3d.InventoryProject.entity.FilamentSpool;
 import com.inventory3d.InventoryProject.entity.Resin;
-import com.inventory3d.InventoryProject.model.FilamentSpoolDTO;
 import com.inventory3d.InventoryProject.model.ResinDTO;
-import com.inventory3d.InventoryProject.repository.ResinRepo;
 import com.inventory3d.InventoryProject.service.ResinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

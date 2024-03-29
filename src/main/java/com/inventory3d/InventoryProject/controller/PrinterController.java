@@ -1,26 +1,19 @@
 package com.inventory3d.InventoryProject.controller;
 
-import com.inventory3d.InventoryProject.entity.FilamentSpool;
 import com.inventory3d.InventoryProject.entity.Printer;
-import com.inventory3d.InventoryProject.entity.Resin;
 import com.inventory3d.InventoryProject.model.PrinterDTO;
 import com.inventory3d.InventoryProject.repository.PrinterRepo;
-import com.inventory3d.InventoryProject.service.FilamentService;
 import com.inventory3d.InventoryProject.service.PrinterService;
-import com.inventory3d.InventoryProject.service.ResinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Configuration
 @Controller
@@ -28,11 +21,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/printers")
 public class PrinterController {
 
+    private static final List<String> types = Arrays.asList("FDM", "SLA");
     private final PrinterService printerService;
     private final PrinterRepo printerRepo;
-
-    private static final List<String> types = Arrays.asList("FDM", "SLA");
-
 
     @GetMapping("/all")
     public String listPrinters(Model model) {
@@ -75,7 +66,6 @@ public class PrinterController {
     }
 
 
-
     @GetMapping("/delete/{id}")
     public String deletePrinter(@PathVariable Integer id) {
         printerService.deletePrinter(id);
@@ -91,7 +81,6 @@ public class PrinterController {
 
         return "printers-edit";
     }
-
 
 
     @PostMapping("/edit/{id}")
