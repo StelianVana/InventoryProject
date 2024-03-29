@@ -32,7 +32,7 @@ public class PrinterServiceImpl implements PrinterService {
     }
 
     @Override
-    public List<Printer> getAllPrinters(){
+    public List<Printer> getAllPrinters() {
         return printerRepo.findAll();
     }
 

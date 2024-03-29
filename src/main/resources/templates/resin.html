@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Resins - 3D Inventory Management System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
     <style>
         body {
      margin: 0;
      padding-top: 56px;
-     background-image: url('/images/printerLight.png'); /* Adjust with your light mode background image */
+     background-image: url('/images/resinLight.png'); /* Adjust with your light mode background image */
      background-size: cover;
      transition: background-color 0.5s, background-image 0.5s;
  }
@@ -54,7 +54,7 @@
  }
 
  body.night-mode {
-     background-image: url('/images/printerDark.png'); /* Adjust with your dark mode background image */
+     background-image: url('/images/resinDark.png'); /* Adjust with your dark mode background image */
      color: #CCCCCC;
  }
 
@@ -135,11 +135,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-            <img src="/images/LOGO.png" alt="Logo" class="navbar-logo">
+            <img alt="Logo" class="navbar-logo" src="/images/LOGO.png">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                aria-label="Toggle navigation">
+        <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse"
+                type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -156,7 +156,7 @@
 <div class="container mt-4">
     <h1>List Resins</h1>
     <div class="mb-3">
-        <a th:href="@{/resins/add}" class="btn btn-primary">Add Resin</a>
+        <a class="btn btn-primary" th:href="@{/resins/add}">Add Resin</a>
     </div>
     <div class="counters mt-4 mb-4 d-flex justify-content-start">
         <div class="total-pieces me-4 p-2 bg-light border rounded">
@@ -168,42 +168,44 @@
             <span th:text="${totalPrice}"></span>
         </div>
     </div>
-        <table class="table table-custom">
-            <thead>
-            <tr>
-                <th>Resin Brand</th>
-                <th>Resin Color</th>
-                <th>Resin Type</th>
-                <th>Resin Price</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+    <table class="table table-custom">
+        <thead>
+        <tr>
+            <th>Resin Brand</th>
+            <th>Resin Color</th>
+            <th>Resin Type</th>
+            <th>Resin Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr th:each="resin : ${resins}">
             <td th:text="${resin.brand}"></td>
             <td th:text="${resin.color}"></td>
             <td th:text="${resin.type}"></td>
             <td th:text="${resin.price}"></td>
             <td>
-                <form th:action="@{/resins/updateQuantity}" method="post" onsubmit="return confirmUpdateQuantity()">
-                    <input type="hidden" name="id" th:value="${resin.id}"/>
-                    <input type="number" name="quantity" th:value="${resin.quantity}" min="1" required class="form-control"/>
-                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                <form method="post" onsubmit="return confirmUpdateQuantity()" th:action="@{/resins/updateQuantity}">
+                    <input name="id" th:value="${resin.id}" type="hidden"/>
+                    <input class="form-control" min="1" name="quantity" required th:value="${resin.quantity}"
+                           type="number"/>
+                    <button class="btn btn-primary btn-sm" type="submit">Update</button>
                 </form>
             </td>
             <td>
-                <a th:href="@{'/resins/edit/' + ${resin.id}}" class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{'/resins/delete/' + ${resin.id}}" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</a>
+                <a class="btn btn-warning btn-sm" th:href="@{'/resins/edit/' + ${resin.id}}">Edit</a>
+                <a class="btn btn-danger btn-sm" onclick="return confirmDelete()"
+                   th:href="@{'/resins/delete/' + ${resin.id}}">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function toggleNightMode() {
     var body = document.body;

@@ -1,6 +1,5 @@
 package com.inventory3d.InventoryProject.repository;
 
-import com.inventory3d.InventoryProject.entity.Extra;
 import com.inventory3d.InventoryProject.entity.Resin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,8 +23,8 @@ public interface ResinRepo extends JpaRepository<Resin, Integer> {
 
     @Query("SELECT r FROM Resin r WHERE r.brand = :brand AND r.color = :color AND r.type = :type AND r.price = :price")
     List<Resin> findByAllAttributesExceptQuantity(@Param("brand") String brand,
-                                            @Param("color") String color,
-                                            @Param("type") String type,
-                                            @Param("price") Double price);
+                                                  @Param("color") String color,
+                                                  @Param("type") String type,
+                                                  @Param("price") Double price);
 }
 

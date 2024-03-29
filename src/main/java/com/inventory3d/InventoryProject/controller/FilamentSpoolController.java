@@ -2,9 +2,7 @@ package com.inventory3d.InventoryProject.controller;
 
 import com.inventory3d.InventoryProject.entity.FilamentSpool;
 import com.inventory3d.InventoryProject.mapper.FilamentSpoolMapper;
-import com.inventory3d.InventoryProject.model.ExtraDTO;
 import com.inventory3d.InventoryProject.model.FilamentSpoolDTO;
-import com.inventory3d.InventoryProject.model.ResinDTO;
 import com.inventory3d.InventoryProject.service.FilamentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +33,7 @@ public class FilamentSpoolController {
         model.addAttribute("totalPrice", totalPrice);
         return "filamentSpool";
     }
+
     @GetMapping("/add")
     public String addFilamentSpoolForm(Model model) {
         FilamentSpoolDTO filamentSpool = new FilamentSpoolDTO();

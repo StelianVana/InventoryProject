@@ -1,6 +1,5 @@
 package com.inventory3d.InventoryProject.model;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

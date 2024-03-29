@@ -102,5 +102,5 @@ public class FilamentServiceIMPL implements FilamentService {
         updatedFilamentSpoolDTO.setId(id);
         FilamentSpool spoolToUpdate = filamentSpoolMapper.DTOToEntity(updatedFilamentSpoolDTO);
         filamentSpoolRepo.save(spoolToUpdate);
-}
+    }
 }

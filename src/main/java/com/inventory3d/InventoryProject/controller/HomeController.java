@@ -1,7 +1,6 @@
 package com.inventory3d.InventoryProject.controller;
 
 import com.inventory3d.InventoryProject.entity.Printer;
-import com.inventory3d.InventoryProject.model.PrinterDTO;
 import com.inventory3d.InventoryProject.service.PrinterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

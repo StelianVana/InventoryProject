@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class ExtraController {
     }
 
     @GetMapping("/add")
-    public String addExtraForm(Model model){
+    public String addExtraForm(Model model) {
         ExtraDTO extra = new ExtraDTO();
         model.addAttribute("extra", extra);
         return "extra-add";
@@ -54,6 +53,7 @@ public class ExtraController {
         }
         return "redirect:/extras/all";
     }
+
     @PostMapping("/add")
     public String addedExtra(@ModelAttribute("extra") ExtraDTO extraDTO) {
         ExtraDTO existingExtraDTO = extraService.findByAllAttributes(extraDTO.getBrand(), extraDTO.getCategory(), extraDTO.getName(), extraDTO.getPrice(), extraDTO.getQuantity());
@@ -70,13 +70,13 @@ public class ExtraController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteExtra(@PathVariable Integer id){
+    public String deleteExtra(@PathVariable Integer id) {
         extraService.deleteExtra(id);
         return "redirect:/extras/all";
     }
 
     @GetMapping("/edit/{id}")
-    public String editExtraForm(@PathVariable Integer id,Model model){
+    public String editExtraForm(@PathVariable Integer id, Model model) {
         Optional<ExtraDTO> extra = extraService.findById(id);
         model.addAttribute("extra", extra.get());
         return "extra-edit";
